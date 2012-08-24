@@ -45,15 +45,15 @@ var MyFitnessPalForKeto = {
 			container.appendChild(this.container.querySelector('#daily-stats').cloneNode(true));
 
 			number = container.querySelector('#calories-remaining-number');
-			number.textContent = food.columns.netcarb.remaining;
-			number.className = (parseInt(food.columns.netcarb.remaining, 10) < 0) ? 'negative' : 'positive';
+			number.textContent = food.columns.netcarbs.remaining;
+			number.className = (parseInt(food.columns.netcarbs.remaining, 10) < 0) ? 'negative' : 'positive';
 
 			title  = container.querySelector('#calories-remaining-label');
-			title.textContent = title.textContent.replace('Calories', 'Net Carb');
+			title.textContent = title.textContent.replace('Calories', 'Net Carbs');
 
 			cols = container.querySelectorAll('#daily-stats tbody td');
-			cols[0].textContent = food.columns.netcarb.goal;
-			cols[1].textContent = food.columns.netcarb.total;
+			cols[0].textContent = food.columns.netcarbs.goal;
+			cols[1].textContent = food.columns.netcarbs.total;
 			cols[2].parentNode.removeChild(cols[2]);
 			cols[3].parentNode.removeChild(cols[3]);
 
@@ -74,7 +74,7 @@ var MyFitnessPalForKeto = {
 
 		columns: {
 			'calories': {},
-			'netcarb': {},
+			'netcarbs': {},
 			'carbs': {},
 			'fiber': {},
 			'fat': {},
@@ -92,7 +92,7 @@ var MyFitnessPalForKeto = {
 					this.calculateNetCarbs();
 				}
 
-				if (typeof this.columns.netcarb.index === 'number' && typeof this.columns.fat.index === 'number' && typeof this.columns.protein.index === 'number') {
+				if (typeof this.columns.netcarbs.index === 'number' && typeof this.columns.fat.index === 'number' && typeof this.columns.protein.index === 'number') {
 					this.calculatePercentages();
 					this.createChart();
 				}
@@ -122,7 +122,7 @@ var MyFitnessPalForKeto = {
 			for (i = rows.length - 1; i >= 0; i -= 1) {
 				if (i === 0 || i === rows.length - 1) {
 					cell.className = 'alt';
-					cell.textContent = 'Net Carb';
+					cell.textContent = 'Net Carbs';
 				} else {
 					cell.className = '';
 					cell.textContent = '';
@@ -139,32 +139,32 @@ var MyFitnessPalForKeto = {
 		},
 
 		calculateNetCarbs: function () {
-			var rows, i, carbs, fiber, netcarb;
+			var rows, i, carbs, fiber, netcarbs;
 
 			rows = this.container.querySelectorAll('tr:not(.spacer)');
 			for (i = rows.length - 1; i >= 0; i -= 1) {
 				if (rows[i].children.length >= this.columns.carbs.index && rows[i].children.length >= this.columns.fiber.index) {
 					carbs = parseInt(rows[i].children[this.columns.carbs.index].textContent, 10);
 					fiber = parseInt(rows[i].children[this.columns.fiber.index].textContent, 10);
-					netcarb = carbs - fiber;
+					netcarbs = carbs - fiber;
 
-					if (!isNaN(netcarb)) {
-						rows[i].children[this.columns.netcarb.index].textContent = netcarb;
+					if (!isNaN(netcarbs)) {
+						rows[i].children[this.columns.netcarbs.index].textContent = netcarbs;
 					} else if (rows[i].className.match('total')) {
-						rows[i].children[this.columns.netcarb.index].textContent = '0';
+						rows[i].children[this.columns.netcarbs.index].textContent = '0';
 					}
 
 					if (rows[i].className.match('remaining')) {
-						this.columns.netcarb.remaining = netcarb;
-						if (netcarb > 0) {
-							rows[i].children[this.columns.netcarb.index].className = 'positive';
-						} else if (netcarb < 0) {
-							rows[i].children[this.columns.netcarb.index].className = 'negative';
+						this.columns.netcarbs.remaining = netcarbs;
+						if (netcarbs > 0) {
+							rows[i].children[this.columns.netcarbs.index].className = 'positive';
+						} else if (netcarbs < 0) {
+							rows[i].children[this.columns.netcarbs.index].className = 'negative';
 						}
 					} else if (rows[i].className.match('total') && rows[i].className.match('alt')) {
-						this.columns.netcarb.goal = netcarb;
+						this.columns.netcarbs.goal = netcarbs;
 					} else if (rows[i].className.match('total')) {
-						this.columns.netcarb.total = netcarb;
+						this.columns.netcarbs.total = netcarbs;
 					}
 				}
 			}
@@ -178,7 +178,7 @@ var MyFitnessPalForKeto = {
 			rows = Array.prototype.slice.call(bottoms).concat(Array.prototype.slice.call(totals));
 
 			for (i = rows.length - 1; i >= 0; i -= 1) {
-				carbCals    = parseInt(rows[i].children[this.columns.netcarb.index].textContent, 10) * 4;
+				carbCals    = parseInt(rows[i].children[this.columns.netcarbs.index].textContent, 10) * 4;
 				proteinCals = parseInt(rows[i].children[this.columns.protein.index].textContent, 10) * 4;
 				fatCals     = parseInt(rows[i].children[this.columns.fat.index].textContent, 10) * 4;
 
@@ -190,7 +190,7 @@ var MyFitnessPalForKeto = {
 
 				color = (rows[i].className.match('total')) ? '#0f73ab' : '#000';
 				if (!isNaN(carbPer)) {
-					rows[i].children[this.columns.netcarb.index].innerHTML += '<br /><span style="color:' + color + '; font-size:10px;">' + carbPer + '%</span>';
+					rows[i].children[this.columns.netcarbs.index].innerHTML += '<br /><span style="color:' + color + '; font-size:10px;">' + carbPer + '%</span>';
 				}
 				if (!isNaN(proteinPer)) {
 					rows[i].children[this.columns.protein.index].innerHTML += '<br /><span style="color:' + color + '; font-size:10px;">' + proteinPer + '%</span>';
@@ -202,17 +202,17 @@ var MyFitnessPalForKeto = {
 		},
 
 		createChart: function () {
-			var container, rows, i, netcarb, protein, fat, img, noteform;
+			var container, rows, i, netcarbs, protein, fat, img, noteform;
 			container = document.querySelector('#complete_day + .block');
 			if (container) {
 				rows = this.container.querySelectorAll('tr.total:not(.remaining):not(.alt)');
 				for (i = rows.length - 1; i >= 0; i -= 1) {
-					netcarb = rows[i].children[this.columns.netcarb.index].innerHTML;
+					netcarbs = rows[i].children[this.columns.netcarbs.index].innerHTML;
 					protein = rows[i].children[this.columns.protein.index].innerHTML;
 					fat     = rows[i].children[this.columns.fat.index].innerHTML;
 
 					img = new Image();
-					img.src = 'http://chart.apis.google.com/chart?chd=t:' + netcarb.replace(/<.*/, '') + ',' + protein.replace(/<.*/, '') + ',' + fat.replace(/<.*/, '') + '&chdl=Net+Carb+' + netcarb.replace(/.*\>(\d+\%)<.*/, '$1') + '|Protein+' + protein.replace(/.*\>(\d+\%)<.*/, '$1') + '|Fat+' + fat.replace(/.*\>(\d+\%)<.*/, '$1') + '&chs=200x220&cht=p&chco=f7941e|CAE6f2|2B9ACB&chdlp=b';
+					img.src = 'http://chart.apis.google.com/chart?chd=t:' + netcarbs.replace(/<.*/, '') + ',' + protein.replace(/<.*/, '') + ',' + fat.replace(/<.*/, '') + '&chdl=Net+Carb+' + netcarbs.replace(/.*\>(\d+\%)<.*/, '$1') + '|Protein+' + protein.replace(/.*\>(\d+\%)<.*/, '$1') + '|Fat+' + fat.replace(/.*\>(\d+\%)<.*/, '$1') + '&chs=200x220&cht=p&chco=f7941e|CAE6f2|2B9ACB&chdlp=b';
 					img.style.cssFloat = 'left';
 					img.style.margin = '-30px 20px 20px -10px';
 
