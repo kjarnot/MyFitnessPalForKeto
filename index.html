@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="utf-8">
+	<title>Keto</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Rammetto+One" />
+	<link rel="stylesheet" href="/=/style.css" type="text/css" />
+</head>
+<body>
+	<h1>MyFitnessPal for Keto</h1>
+	<p>A plugin that makes MyFitnessPal more keto friendly instead of calorie-centric.</p>
+	<ul>
+		<li>If you have “Carb” and “Fiber” columns on your food diary pages:<ul>
+			<li>Adds “Net Carb” column to your food diary pages</li>
+			<li>Adds “Net Carb Remaining” table to “Your Daily Summary” widget on your dashboard</li>
+		</ul></li>
+		<li>If you have “Carb,” “Fiber,” “Protein,” and “Fat” columns on your food diary pages:<ul>
+			<li>Adds percentages for “Net Carb,” “Protein,” and “Fat” from a 4/4/9 ratio calculation of real calories for each meal and daily total on your food diary pages</li>
+			<li>Adds pie chart for your daily percentages of “Net Carb,” “Protein,” and “Fat” from above to your food diary between your “Water Consumption” and “Today's Food Notes” sections</li>
+		</ul></li>
+	</ul>
+
+	<!--
+	Adds display of Carb/Protein/Fat percentages to any daily food diary page. Also adds "Real Calories" calculation based off 4/4/9 algorithm. Based on "MyFitnessPal Percentages", modified by Surye to add low carb features such as net carbs. Requires the following columns: Fat, Protein, Carbs, Fiber
+
+	Version: 1.1
+
+	Created primarily for the /r/keto community on Reddit.
+
+	Remember this script REQUIRES the following columns: Fat, Protein, Carbs, Fiber!
+	Install:
+	Chrome: Chrome stopped allowing scripts installed outside of their webstore. Here's two options to install them in Chrome:
+	Install Tampermonkey and install the script as normal.
+	Another option is to download the script to your PC locally using Save As. Then open "chrome://chrome/extensions" and drag and drop the .js file on Chrome. Here is a more detailed description of this method
+	Firefox: Install Greasemonkey, then click install.
+	Internet Explorer: Install Trixie, http://www.bhelpuri.net/Trixie/, though I have not tested it on IE, it should work.
+	FAQ:
+	Q: Food item shows up in red and says bad data?! What gives?! 
+	A: Someone added the food item incorrectly, and put net carbs in the carbs value, and so the fiber subtracts from it, making negative carbs. Nothing I can really do about this without modifying more data than I wish to.
+
+	Q: I get NaN's in the Net Carb column! 
+	A: It may be you didn't have all the required columns added, go to http://www.myfitnesspal.com/account/diary_settings and make sure all the columns required are there (most likely, you need to add the fiber column).
+	-->
+
+</body>
+</html>
