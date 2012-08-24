@@ -45,7 +45,7 @@
 		</dict>
 	</dict>
 	<key>Update Manifest URL</key>
-	<string>http://keto.lauren.me/myfitnesspal/</string>
+	<string>http://myfitnesspalforketo.lauren.me/</string>
 	<key>Website</key>
 	<string>http://userscripts.org/scripts/show/124645</string>
 </dict>
