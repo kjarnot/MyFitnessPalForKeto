@@ -1,0 +1,15 @@
+{
+	"name": "MyFitnessPal for Keto",
+	"version": "1.0",
+	"description": "A plugin that makes MyFitnessPal more keto friendly instead of calorie-centric.",
+	"manifest_version": 2,
+	"icons": { 
+		"32":  "images/Icon-32.png",
+		"48":  "images/Icon-48.png",
+		"128": "images/Icon-128.png"
+	},
+	"content_scripts": [{
+		"matches": [ "http://www.myfitnesspal.com/*" ],
+		"js": [ "global.js" ]
+	}]
+}
