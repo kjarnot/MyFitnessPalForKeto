@@ -4,9 +4,9 @@
 	"description": "A plugin that makes MyFitnessPal more keto friendly instead of calorie-centric.",
 	"manifest_version": 2,
 	"icons": { 
-		"32":  "images/Icon-32.png",
-		"48":  "images/Icon-48.png",
-		"128": "images/Icon-128.png"
+		"32":  "Icon-32.png",
+		"48":  "Icon-48.png",
+		"128": "Icon-128.png"
 	},
 	"content_scripts": [{
 		"matches": [ "http://www.myfitnesspal.com/*" ],
