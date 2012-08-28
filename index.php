@@ -1,4 +1,4 @@
-<?php /*require('=/markdown.php');*/ ?>
+<?php require('=/php-markdown/markdown.php'); ?>
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -19,7 +19,7 @@
 <body><?php
 
 	$uri = ($_GET['uri'] && file_exists(__DIR__ . DIRECTORY_SEPARATOR . $_GET['uri'] . '.md')) ? $_GET['uri'] : 'README.md';
-	/*echo Markdown(file_get_contents($uri));*/
+	echo Markdown(file_get_contents($uri));
 
 ?></body>
 </html>
