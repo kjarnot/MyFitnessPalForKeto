@@ -11,8 +11,7 @@ A plugin that makes MyFitnessPal more keto friendly instead of calorie-centric.
 
 ## Screenshots
 ##### Dashboard:
-![Daily Summary with Net Carbs Remaining](donotknow.github.com/donotknow/MyFitnessPalForKeto/images/daily-summary.png)
-<img src="" width="498" height="273" alt="" />
+![Daily Summary with Net Carbs Remaining](http://donotknow.github.com/MyFitnessPalForKeto/images/daily-summary.png)
 ##### Food Diary:
-<img src="images/food-diary.png" width="770" height="292" alt="Food Diary with Net Carbs Column" />
-<img src="images/pie-chart.png" width="777" height="231" alt="Food Diary with Net Carbs, Protein, and Fat Pie Chart /">
+![Food Diary with Net Carbs Column](http://donotknow.github.com/MyFitnessPalForKeto/images/food-diary.png)
+![Food Diary with Net Carbs, Protein, and Fat Pie Chart](http://donotknow.github.com/MyFitnessPalForKeto/images/pie-chart.png)
