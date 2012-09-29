@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>Author</key>
-	<string>Lauren Bosak</string>
+	<string>Lauren Bosak and Dave Bullock</string>
 	<key>Builder Version</key>
-	<string>8536.25</string>
+	<string>8536.26.14</string>
 	<key>CFBundleDisplayName</key>
 	<string>MyFitnessPal for Keto</string>
 	<key>CFBundleIdentifier</key>
@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.1</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>Chrome</key>
@@ -31,7 +31,7 @@
 	<key>Description</key>
 	<string>A plugin that makes MyFitnessPal more keto friendly instead of calorie-centric.</string>
 	<key>ExtensionInfoDictionaryVersion</key>
-	<string>1.0</string>
+	<string>1.1</string>
 	<key>Permissions</key>
 	<dict>
 		<key>Website Access</key>
@@ -45,7 +45,7 @@
 		</dict>
 	</dict>
 	<key>Update Manifest URL</key>
-	<string>http://myfitnesspalforketo.lauren.me/</string>
+	<string>https://github.com/eecue/MyFitnessPalForKeto</string>
 	<key>Website</key>
 	<string>http://userscripts.org/scripts/show/124645</string>
 </dict>

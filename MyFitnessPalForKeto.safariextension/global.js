@@ -124,8 +124,8 @@ var MyFitnessPalForKeto = {
 					cell.className = 'alt';
 					cell.textContent = 'Net Carbs';
 				} else {
-					cell.className = '';
-					cell.textContent = '';
+					cell.className = 'alt';
+					cell.textContent = 'Net Carbs';
 				}
 
 				carbCell = rows[i].querySelector('td:nth-child(' + (this.columns.carbs.index + 1) + ')');
@@ -139,32 +139,45 @@ var MyFitnessPalForKeto = {
 		},
 
 		calculateNetCarbs: function () {
-			var rows, i, carbs, fiber, netcarbs;
+			var rows, i, carbs, fiber, netcarbs, carb_goal, total_netcarbs;
 
 			rows = this.container.querySelectorAll('tr:not(.spacer)');
-			for (i = rows.length - 1; i >= 0; i -= 1) {
+			for (i = 1; i < rows.length; i++) {
 				if (rows[i].children.length >= this.columns.carbs.index && rows[i].children.length >= this.columns.fiber.index) {
 					carbs = parseInt(rows[i].children[this.columns.carbs.index].textContent, 10);
 					fiber = parseInt(rows[i].children[this.columns.fiber.index].textContent, 10);
 					netcarbs = carbs - fiber;
 
-					if (!isNaN(netcarbs)) {
-						rows[i].children[this.columns.netcarbs.index].textContent = netcarbs;
-					} else if (rows[i].className.match('total')) {
-						rows[i].children[this.columns.netcarbs.index].textContent = '0';
+					if (rows[i].children[0].textContent.search('Totals') > -1){
+						total_netcarbs = netcarbs;
 					}
-
+					if (rows[i].children[0].textContent.search('Your Daily Goal') > -1){
+						rows[i].children[this.columns.netcarbs.index].textContent = carbs;	
+						carb_goal = carbs;					
+					}else if (rows[i].children[0].textContent.search('Remaining') > -1){
+						rows[i].children[this.columns.netcarbs.index].textContent = carb_goal - total_netcarbs;	
+					}else{
+						if (!isNaN(netcarbs) && netcarbs > 0) {
+							rows[i].children[this.columns.netcarbs.index].textContent = netcarbs;
+						} else if (rows[i].className.match('total')) {
+							rows[i].children[this.columns.netcarbs.index].textContent = '0';
+						} else if (netcarbs <= 0){
+							rows[i].children[this.columns.netcarbs.index].textContent = '0';							
+						}						
+					}
+				
+				
 					if (rows[i].className.match('remaining')) {
-						this.columns.netcarbs.remaining = netcarbs;
-						if (netcarbs > 0) {
+						this.columns.netcarbs.remaining = carb_goal - total_netcarbs;
+						if (carb_goal - total_netcarbs > 0) {
 							rows[i].children[this.columns.netcarbs.index].className = 'positive';
-						} else if (netcarbs < 0) {
+						} else if (carb_goal - total_netcarbs < 0) {
 							rows[i].children[this.columns.netcarbs.index].className = 'negative';
 						}
 					} else if (rows[i].className.match('total') && rows[i].className.match('alt')) {
-						this.columns.netcarbs.goal = netcarbs;
+						this.columns.netcarbs.goal = carb_goal;
 					} else if (rows[i].className.match('total')) {
-						this.columns.netcarbs.total = netcarbs;
+						this.columns.netcarbs.total = netcarbs ;
 					}
 				}
 			}
@@ -180,7 +193,7 @@ var MyFitnessPalForKeto = {
 			for (i = rows.length - 1; i >= 0; i -= 1) {
 				carbCals    = parseInt(rows[i].children[this.columns.netcarbs.index].textContent, 10) * 4;
 				proteinCals = parseInt(rows[i].children[this.columns.protein.index].textContent, 10) * 4;
-				fatCals     = parseInt(rows[i].children[this.columns.fat.index].textContent, 10) * 4;
+				fatCals     = parseInt(rows[i].children[this.columns.fat.index].textContent, 10) * 9;
 
 				cals = carbCals + proteinCals + fatCals;
 
